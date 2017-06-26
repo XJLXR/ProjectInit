@@ -1,0 +1,127 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+   /* signingConfigs {
+        MyConfig {
+            keyAlias 'newlife'
+            keyPassword '123456'
+            storeFile file('C:/Users/XiongRun/Desktop/keystore/newlife.jks')
+            storePassword '123456'
+        }
+    }*/
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+    defaultConfig {
+        applicationId "com.demo.android.newlife"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "channel_name"]
+
+    }
+    buildTypes {
+        release {
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+
+       // pcguanwang {}
+      //  h5guanwang {}
+       // hiapk {}
+        //m91 {}
+        //appchina {}
+       // baidu {}
+        //qq {}
+       // jifeng {}
+    //   mumayi {}
+        //m360 {}
+       // youyi {}
+        wandoujia {}
+        xiaomi {}
+       // sougou {}
+        //leshangdian {}
+        //huawei {}
+       // uc {}
+        //oppo {}
+        //flyme {}
+        //jinli {}
+        //letv {}
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    //引导页
+    compile 'com.stephentuso:welcome:1.4.1'
+    //butterknife防空指针
+    compile 'com.jakewharton:butterknife:8.5.1'
+    apt 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.x.y'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    //状态栏
+    compile 'com.blankj:utilcode:1.5.0'
+    //各种工具类
+    compile 'com.jcodecraeer:xrecyclerview:1.3.2'
+    //刷新
+    compile 'com.zhy:base-rvadapter:3.0.3'
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'com.jude:rollviewpager:1.4.6'
+    //轮播
+    compile 'com.github.chrisbanes:PhotoView:1.2.6'
+    //图片防缩
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.7.9'
+    // compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.7.9'
+    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.7.9'
+    //compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.7.9'
+    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.7.9'
+    compile 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
+    //Stetho调试工具
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    //内存泄露
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    compile files('libs/tbs_sdk_thirdapp_v3.1.0.1034_43100_sharewithdownload_obfs_20170301_182143.jar')
+    //友盟
+    compile 'com.umeng.analytics:analytics:latest.integration'
+}

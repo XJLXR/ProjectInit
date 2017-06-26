@@ -1,0 +1,1 @@
+include ':normalmodel', ':jcvideoplayer-lib', ':mvpmodel', ':newlife'
